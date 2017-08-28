@@ -60,7 +60,6 @@ function loadStyles(url) {
 }
 
 
-
 //获取微信浏览器标识
 function getWeiXinBrowrsCode() {
 
@@ -115,7 +114,7 @@ function meta() {
 //跨浏览器事件处理程序
 var EventUtil = {
 
-    addHandler: function(element, type, handler) {
+    addHandler: function (element, type, handler) {
         if (element.addEventListener) {
             element.addEventListener(type, handler, false);
         } else if (element.attacchEvent) {
@@ -124,20 +123,20 @@ var EventUtil = {
             element["on" + type] = handler;
         }
     },
-    getEvent: function(event) {
+    getEvent: function (event) {
         return event ? event : window.event;
     },
-    getTarget: function(event) {
+    getTarget: function (event) {
         return event.event.target || event.srcElement;
     },
-    preventDefault: function(event) {
+    preventDefault: function (event) {
         if (event.preventDefault) {
             event.preventDefault();
         } else {
             event.returnValue = false;
         }
     },
-    removeHandler: function(element, type, handler) {
+    removeHandler: function (element, type, handler) {
         if (element.removeEventListener) {
             element.removeEventListener(type, handler, false);
         } else if (element.detachEvent) {
@@ -146,7 +145,7 @@ var EventUtil = {
             element["on" + type] = null;
         }
     },
-    stopPropagation:function(event) {
+    stopPropagation: function (event) {
         if (event.stopPropagation) {
             event.stopPropagation();
         } else {
@@ -193,15 +192,16 @@ function createXHR(argument) {
 
 
 function randomString(len) {
-                len = len || 32;
-                var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
-                var maxPos = $chars.length;
-                var pwd = '';
-                for (i = 0; i < len; i++) {
-                    pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
-                }
-                return pwd;
-            }
+    len = len || 32;
+    var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+    var maxPos = $chars.length;
+    var pwd = '';
+    for (i = 0; i < len; i++) {
+        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return pwd;
+}
+
 /**
  * 生成随机字符串
  * @param len
@@ -219,34 +219,35 @@ function randomString(len) {
 }
 
 //获得cookie函数
-function getCookie($name){
-    var data=document.cookie;
-    var dataArray=data.split("; ");
-    for(var i=0;i<dataArray.length;i++){
-        var varName=dataArray[i].split("=");
-        if(varName[0]==$name){
+function getCookie($name) {
+    var data = document.cookie;
+    var dataArray = data.split("; ");
+    for (var i = 0; i < dataArray.length; i++) {
+        var varName = dataArray[i].split("=");
+        if (varName[0] == $name) {
             return decodeURI(varName[1]);
         }
 
     }
 }
+
 //删除cookie中所有定变量函数
-function delAllCookie(){
-    var myDate=new Date();
+function delAllCookie() {
+    var myDate = new Date();
     myDate.setTime(-1000);//设置时间
-    var data=document.cookie;
-    var dataArray=data.split("; ");
-    for(var i=0;i<dataArray.length;i++){
-        var varName=dataArray[i].split("=");
-        document.cookie=varName[0]+"=''; expires="+myDate.toGMTString();
+    var data = document.cookie;
+    var dataArray = data.split("; ");
+    for (var i = 0; i < dataArray.length; i++) {
+        var varName = dataArray[i].split("=");
+        document.cookie = varName[0] + "=''; expires=" + myDate.toGMTString();
     }
 
 }
 
 //向服务器端写入javascript日记 通过get方式
-function logError(url,sev,msg) {
+function logError(url, sev, msg) {
     var img = new Image();
-    img.src=url+"?sev="+encodeURIComponent(sev)+"&msg="+encodeURIComponent(msg);
+    img.src = url + "?sev=" + encodeURIComponent(sev) + "&msg=" + encodeURIComponent(msg);
 }
 
 
@@ -259,11 +260,11 @@ function goToTop(elemt) {
     var timer = null;
     var pagelookheight = document.documentElement.clientHeight; //获取屏幕的高度
 
-    window.onscroll = function(){
+    window.onscroll = function () {
         var backtop = document.body.scrollTop; //获取滚动的高度
-        if(backtop >= pagelookheight){
+        if (backtop >= pagelookheight) {
             topbtn.style.display = "block";
-        }else{
+        } else {
             topbtn.style.display = "none";
         }
     };
@@ -271,9 +272,9 @@ function goToTop(elemt) {
     topbtn.onclick = function () {
         timer = setInterval(function () {
             var backtop = document.body.scrollTop; //获取滚动的高度
-            var speedtop = backtop/5;//计算每次滚动的距离
-            document.body.scrollTop = backtop -speedtop;
-            if(backtop ==0){
+            var speedtop = backtop / 5;//计算每次滚动的距离
+            document.body.scrollTop = backtop - speedtop;
+            if (backtop == 0) {
                 clearInterval(timer);
             }
         }, 30);
@@ -281,27 +282,25 @@ function goToTop(elemt) {
 }
 
 
+//第一步：创建一个XMLHttpRequest对象，如果浏览器不支持，则创建 ActiveXObject
+var xmlHttp;
 
-
-
-    //第一步：创建一个XMLHttpRequest对象，如果浏览器不支持，则创建 ActiveXObject
-    var xmlHttp;
-    function createxmlHttpRequest() {
-        if (window.ActiveXObject) {
-            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        else if (window.XMLHttpRequest) {
-            xmlHttp=new XMLHttpRequest();
-        }
+function createxmlHttpRequest() {
+    if (window.ActiveXObject) {
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    
-    function doGet(url){
-        createxmlHttpRequest();
-        xmlHttp.open("GET",url);    //第二步，打开连接
-        xmlHttp.send(null);         //第三步，发送数据（请求体或查询参数）
-        //第四步，监听响应变化
-        xmlHttp.onreadystatechange = function(){
-            if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) {
+    else if (window.XMLHttpRequest) {
+        xmlHttp = new XMLHttpRequest();
+    }
+}
+
+function doGet(url) {
+    createxmlHttpRequest();
+    xmlHttp.open("GET", url);    //第二步，打开连接
+    xmlHttp.send(null);         //第三步，发送数据（请求体或查询参数）
+    //第四步，监听响应变化
+    xmlHttp.onreadystatechange = function () {
+        if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) {
             /*readyState的状态
                 0：未初始化，尚未调用open（）方法
                 1：启动，已经调用open（），但未调用send（）
@@ -309,30 +308,50 @@ function goToTop(elemt) {
                 3：接收，已经接收到部分响应
                 4：完成，已经接收到所有响应数据
             */
-                //第五步，处理数据
-                console.log(xmlHttp.response);
-                // res.innerHTML=xmlHttp.response;
-            }
-            else {
-                console.log('fail');
-                console.log(xmlHttp.readyState);
-            }
+            //第五步，处理数据
+            console.log(xmlHttp.response);
+            // res.innerHTML=xmlHttp.response;
+        }
+        else {
+            console.log('fail');
+            console.log(xmlHttp.readyState);
         }
     }
-    
-    function doPost(url,data){
-        createxmlHttpRequest();
-        xmlHttp.open("POST",url);
-        xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        xmlHttp.send(data);
-        xmlHttp.onreadystatechange = function() {
-            if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) {
-                console.log(xmlHttp.response);
-                // res.innerHTML=xmlHttp.response;
-            }
-            else {
-                console.log('fail');
-                console.log(xmlHttp.readyState);
-            }
+}
+
+function doPost(url, data) {
+    createxmlHttpRequest();
+    xmlHttp.open("POST", url);
+    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xmlHttp.send(data);
+    xmlHttp.onreadystatechange = function () {
+        if ((xmlHttp.readyState == 4) && (xmlHttp.status == 200)) {
+            console.log(xmlHttp.response);
+            // res.innerHTML=xmlHttp.response;
         }
-    } 
+        else {
+            console.log('fail');
+            console.log(xmlHttp.readyState);
+        }
+    }
+}
+
+
+//js 格式化日期
+function formatDateTime(timeStamp) {
+
+    var date = new Date();
+    date.setTime(timeStamp * 1000);
+    var y = date.getFullYear();
+    var m = date.getMonth() + 1;
+    m = m < 10 ? ('0' + m) : m;
+    var d = date.getDate();
+    d = d < 10 ? ('0' + d) : d;
+    var h = date.getHours();
+    h = h < 10 ? ('0' + h) : h;
+    var minute = date.getMinutes();
+    var second = date.getSeconds();
+    minute = minute < 10 ? ('0' + minute) : minute;
+    second = second < 10 ? ('0' + second) : second;
+    return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+}
