@@ -374,3 +374,32 @@ var tools = {
 //     second = second < 10 ? ('0' + second) : second;
 //     return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
 // }
+
+//输入验证
+var validate={
+    "phone":/^1[3|4|5|7|8|9][0-9]\d{8}$/,
+    "email":/\w+((-w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+/,
+    "idcard":/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/,
+    pattPhone:function (phone) {
+        if(this.phone.test(phone)===false){
+            return false;
+        }else{
+            return true;
+        }
+    },
+    pattCard:function (idCard){
+        if(this.idcard.test(idCard)===false){
+            return false;
+        }else{
+            return true;
+        }
+    },
+    pattEmpty:function (text) {
+        var str=text.trim();
+        if(str.length<1){
+            return false;
+        }else{
+            return true;
+        }
+    }
+};
