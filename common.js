@@ -401,5 +401,18 @@ var validate={
         }else{
             return true;
         }
+    },
+    isPicture:function(fileName) {
+
+    var fileType = fileName.substring(fileName.indexOf(".") + 1).toLowerCase();
+    var fileTypeArr = ['jpg', 'png'];
+    for (var i in fileTypeArr) {
+        if (fileTypeArr[i] === fileType) {
+            return true;
+        } else {
+            return false;
+        }
     }
+
+}
 };
