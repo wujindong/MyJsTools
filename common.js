@@ -337,6 +337,7 @@ function doPost(url, data) {
 }
 
 
+//工具集
 var tools = {
     "formatDateTime": function (timeStamp) {
         var date = new Date();
