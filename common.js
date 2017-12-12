@@ -353,6 +353,16 @@ var tools = {
         minute = minute < 10 ? ('0' + minute) : minute;
         second = second < 10 ? ('0' + second) : second;
         return y + '-' + m + '-' + d + ' ' + h + ':' + minute + ':' + second;
+    },
+    "device": function () {
+        var u = navigator.userAgent;
+        if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+            return 'Android';
+        } else if (u.indexOf('iPhone') > -1) {
+            return 'iPhone';
+        } else if (u.indexOf('Windows Phone') > -1) {
+            return 'wPhone';
+        }
     }
 };
 
