@@ -364,6 +364,11 @@ var tools = {
         } else if (u.indexOf('Windows Phone') > -1) {
             return 'wPhone';
         }
+    },
+    "log":function (url,sev,msg) {
+        //向服务器端写入javascript日记 通过get方式
+        var img = new Image();
+        img.src=url+"?sev="+encodeURIComponent(sev)+"&msg="+encodeURIComponent(msg);
     }
 };
 
